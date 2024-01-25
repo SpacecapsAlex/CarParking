@@ -65,3 +65,8 @@ def initialize(request):
 
     except:
         return HttpResponse('Error')
+
+
+def get_cars(request):
+    cars = Car.objects.all()
+    return render(request, 'autopark/cars.html', {'cars': cars})
