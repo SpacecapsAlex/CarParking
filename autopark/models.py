@@ -25,19 +25,19 @@ class Car(models.Model):
     year = models.IntegerField()
 
 
-class ParkingSlot(models.Model):
-    is_free = models.BooleanField(default=True)
-    number = models.IntegerField()
-    car = models.OneToOneField(Car, on_delete=models.SET_NULL, null=True)
-    parking = models.ForeignKey('Parking', on_delete=models.SET_NULL, null=True)
-
-    class Meta:
-        ordering = ['number']
-
-
 class Parking(models.Model):
     name = models.CharField(max_length=100)
     address = models.CharField(max_length=100)
     phone_number = models.CharField(max_length=20)
     price = models.FloatField()
     description = models.TextField(null=True)
+
+
+class ParkingSlot(models.Model):
+    is_free = models.BooleanField(default=True)
+    number = models.IntegerField()
+    car = models.OneToOneField(Car, on_delete=models.SET_NULL, null=True)
+    parking = models.ForeignKey(Parking, on_delete=models.SET_NULL, null=True)
+
+    class Meta:
+        ordering = ['number']

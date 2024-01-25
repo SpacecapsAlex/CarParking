@@ -11,44 +11,12 @@ def initialize(request):
             CarType(name='Sedan'),
             CarType(name='Hatchback'),
             CarType(name='Minivan'),
-            CarType(name='SUV'),
-            CarType(name='Crossover'),
-            CarType(name='Coupe'),
-            CarType(name='Convertible'),
-            CarType(name='Pickup'),
-            CarType(name='Wagon'),
-            CarType(name='Van'),
-            CarType(name='Limousine'),
-            CarType(name='Roadster'),
-            CarType(name='MPV'),
         ]
 
         car_brands = [
             CarBrand(name='Audi'),
             CarBrand(name='BMW'),
             CarBrand(name='Chevrolet'),
-            CarBrand(name='Citroen'),
-            CarBrand(name='Dacia'),
-            CarBrand(name='Fiat'),
-            CarBrand(name='Ford'),
-            CarBrand(name='Honda'),
-            CarBrand(name='Hyundai'),
-            CarBrand(name='Kia'),
-            CarBrand(name='Lada'),
-            CarBrand(name='Lexus'),
-            CarBrand(name='Mazda'),
-            CarBrand(name='Mercedes-Benz'),
-            CarBrand(name='Mitsubishi'),
-            CarBrand(name='Nissan'),
-            CarBrand(name='Opel'),
-            CarBrand(name='Peugeot'),
-            CarBrand(name='Renault'),
-            CarBrand(name='Seat'),
-            CarBrand(name='Skoda'),
-            CarBrand(name='Suzuki'),
-            CarBrand(name='Toyota'),
-            CarBrand(name='Volkswagen'),
-            CarBrand(name='Volvo'),
         ]
 
         parks = [
@@ -61,12 +29,6 @@ def initialize(request):
             ParkingSlot(number=2),
             ParkingSlot(number=3),
             ParkingSlot(number=4),
-            ParkingSlot(number=5),
-            ParkingSlot(number=6),
-            ParkingSlot(number=7),
-            ParkingSlot(number=8),
-            ParkingSlot(number=9),
-            ParkingSlot(number=10),
         ]
 
         park_slots_2 = [
@@ -74,12 +36,6 @@ def initialize(request):
             ParkingSlot(number=2),
             ParkingSlot(number=3),
             ParkingSlot(number=4),
-            ParkingSlot(number=5),
-            ParkingSlot(number=6),
-            ParkingSlot(number=7),
-            ParkingSlot(number=8),
-            ParkingSlot(number=9),
-            ParkingSlot(number=10),
         ]
 
         for car_type in car_types:
