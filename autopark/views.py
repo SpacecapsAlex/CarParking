@@ -70,3 +70,8 @@ def initialize(request):
 def get_cars(request):
     cars = Car.objects.all()
     return render(request, 'autopark/cars.html', {'cars': cars})
+
+
+def get_car_by_id(request, car_id):
+    car = Car.objects.get(id=car_id)
+    return render(request, 'autopark/get_car_by_id.html', {'car': car})
