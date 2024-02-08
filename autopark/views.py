@@ -133,3 +133,43 @@ def delete_car(request: HttpRequest, car_id: int):
     car = Car.objects.get(id=car_id)
     car.delete()
     return HttpResponseRedirect(reverse('get-cars'))  # reverse - возвращает URL по имени представления
+
+
+"""
+Представление для добавления нового автомобиля в автопарк.
+Обрабатывает как GET, так и POST запросы.
+Для GET запросов извлекает список марок и типов автомобилей и рендерит шаблон 'add_car.html' с данными.
+Для POST запросов извлекает детали автомобиля из запроса и сохраняет новый автомобиль в базу данных, затем перенаправляется на URL 'get-cars'.
+"""
+def add_car(request):
+    if request.method == 'GET':
+        brand_list = CarBrand.objects.all()
+        type_list = CarType.objects.all()
+
+        data = {
+            'brands': brand_list,
+            'types': type_list
+        }
+
+        return render(request, 'autopark/add_car.html', data)
+
+    if request.method == 'POST':
+        car_number = request.POST.get('car_number')
+        car_type_id = request.POST.get('car_type_id')
+        car_brand_id = request.POST.get('car_brand_id')
+        is_electric = request.POST.get('is_electric')
+        year = request.POST.get('year')
+
+        car_type = CarType.objects.get(id=car_type_id)
+        car_brand = CarBrand.objects.get(id=car_brand_id)
+
+        car = Car(
+            car_number=car_number,
+            car_type=car_type,
+            car_brand=car_brand,
+            is_electric=is_electric == 'on',
+            year=year
+        )
+        car.save()
+
+        return HttpResponseRedirect(reverse('get-cars'))
