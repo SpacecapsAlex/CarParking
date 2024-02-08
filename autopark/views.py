@@ -117,3 +117,19 @@ def update_car(request: HttpRequest, car_id: int):
     car.save()
 
     return HttpResponseRedirect(reverse('get-cars'))
+
+
+"""
+Удаляет автомобиль с заданным car_id из базы данных.
+
+Параметры:
+- request: объект HttpRequest
+- car_id: int, ID удаляемого автомобиля
+
+Возвращает:
+- объект HttpResponseRedirect, перенаправляющий на URL 'get-cars'
+"""
+def delete_car(request: HttpRequest, car_id: int):
+    car = Car.objects.get(id=car_id)
+    car.delete()
+    return HttpResponseRedirect(reverse('get-cars'))  # reverse - возвращает URL по имени представления
