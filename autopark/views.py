@@ -1,8 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.urls import reverse
 from django.shortcuts import render
 from .models import CarType, CarBrand, Car, ParkingSlot, Parking
-
-# Create your views here.
 
 
 def initialize(request):
@@ -74,4 +73,47 @@ def get_cars(request):
 
 def get_car_by_id(request, car_id):
     car = Car.objects.get(id=car_id)
-    return render(request, 'autopark/get_car_by_id.html', {'car': car})
+    brand_list = CarBrand.objects.all()
+    type_list = CarType.objects.all()
+
+    data = {
+        'car': car,
+        'brands': brand_list,
+        'types': type_list
+    }
+
+    return render(request, 'autopark/get_car_by_id.html', data)
+
+
+"""
+Обновляет объект автомобиля с предоставленной информацией из HttpRequest.
+
+Параметры:
+    request (HttpRequest): Объект HTTP-запроса.
+    car_id (int): Идентификатор обновляемого автомобиля.
+
+Возвращает:
+    HttpResponseRedirect: Перенаправляет на URL 'get-cars' после обновления автомобиля.
+"""
+def update_car(request: HttpRequest, car_id: int):
+    if request.method != 'POST':
+        return HttpResponse('Invalid request method')
+
+    car = Car.objects.get(id=car_id)
+
+    car_year = request.POST.get('year')
+    car_is_electric = request.POST.get('is_electric')
+    car_type_id = request.POST.get('car_type_id')
+    car_brand_id = request.POST.get('car_brand_id')
+
+    car_type = CarType.objects.get(id=car_type_id)
+    car_brand = CarBrand.objects.get(id=car_brand_id)
+
+    car.car_type = car_type
+    car.car_brand = car_brand
+    car.year = car_year
+    car.is_electric = car_is_electric == 'on'
+
+    car.save()
+
+    return HttpResponseRedirect(reverse('get-cars'))

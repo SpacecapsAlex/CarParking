@@ -20,7 +20,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/auto-park/get-cars/">Home</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'get-cars' %}">Home</a>
         </li>
       </ul>
       <form class="d-flex" role="search">
@@ -33,21 +33,30 @@
   <div class="container">
     <div class="row col-12 offset-lg-2 col-lg-8">
       <h3 class="pt-5">Подробная информация о машине: {{ car.car_number }}</h3>
-      <form class="row">
+      <form method="post" class="row" action="/auto-park/update-car/{{ car.id }}/">
+        {% csrf_token %}
         <div class="col-12 col-lg-6 pb-3">
           <label for="inputcartype" class="form-label fw-medium">Тип</label>
-          <input type="text" value="{{ car.car_type.name }}" class="form-control" id="inputcartype" placeholder="введите тип машины">
+          <select class="form-select" id="inputcartype" name="car_type_id">
+            {% for car_type in types %}
+            <option {% if car_type.id == car.car_type.id %} selected {% endif %} value="{{ car_type.id }}">{{ car_type.name }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="col-12 col-lg-6 pb-3">
           <label for="inputcarbrand" class="form-label fw-medium">Брэнд</label>
-          <input type="text" value="{{ car.car_brand.name }}" class="form-control" id="inputcarbrand" placeholder="введите брэнд машины">
+          <select class="form-select" id="inputcarbrand" name="car_brand_id">
+            {% for car_brand in brands %}
+            <option {% if car_brand.id == car.car_brand.id %} selected {% endif %} value="{{ car_brand.id }}">{{ car_brand.name }}</option>
+            {% endfor %}
+          </select>
         </div>
         <div class="col-12 pb-3">
           <label for="inputyear" class="form-label fw-medium">Год выпуска</label>
-          <input type="number" value="{{ car.year }}" class="form-control" id="inputyear" placeholder="введите год выпуска">
+          <input type="number" value="{{ car.year }}" name="year" class="form-control" id="inputyear" placeholder="введите год выпуска">
         </div>
         <div class="col-12 pb-3">
-          <input class="form-check-input" type="checkbox" {% if car.is_electric %}checked{% endif %} id="flexCheckDefault">
+          <input class="form-check-input" type="checkbox" name="is_electric" {% if car.is_electric %}checked{% endif %} id="flexCheckDefault">
           <label class="form-check-label" for="flexCheckDefault">
             Является ли электрическим
           </label>
