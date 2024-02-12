@@ -1,3 +1,4 @@
+from django.db.models import Q
 from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render
@@ -173,3 +174,27 @@ def add_car(request):
         car.save()
 
         return HttpResponseRedirect(reverse('get-cars'))
+
+
+"""
+Функция для поиска автомобилей по номеру, типу и бренду.
+
+Параметры:
+- request: объект HTTP-запроса
+
+Возвращает:
+- Если метод запроса 'GET', отображает шаблон 'autopark/cars.html'.
+- Если метод запроса не 'GET', фильтрует объекты Car на основе строки поиска и отображает шаблон 'autopark/cars.html' с отфильтрованным списком автомобилей.
+"""
+def search_car(request):
+    if request.method == 'GET':
+        return render(request, 'autopark/cars.html')
+    else:
+        search_string = request.POST.get('search_string')
+        car_list = Car.objects.filter(
+            Q(car_brand__name__icontains=search_string)
+            | Q(car_type__name__icontains=search_string)
+            | Q(car_number__icontains=search_string)
+        )
+
+        return render(request, 'autopark/cars.html', {'cars': car_list})

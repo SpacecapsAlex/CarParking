@@ -21,8 +21,9 @@
             <a class="nav-link active" aria-current="page" href="{% url 'get-cars' %}">Home</a>
           </li>
         </ul>
-        <form class="d-flex" role="search">
-          <input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+        <form class="d-flex" role="search" method="post" action="{% url 'search-car' %}">
+          {% csrf_token %}
+          <input name="search_string" class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
           <button class="btn btn-success" type="submit">Поиск</button>
         </form>
       </div>
