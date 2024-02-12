@@ -1,4 +1,4 @@
-from django.http import HttpResponse, HttpRequest, HttpResponseRedirect
+from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from django.shortcuts import render
 from .models import CarType, CarBrand, Car, ParkingSlot, Parking
