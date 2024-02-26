@@ -22,4 +22,5 @@ urlpatterns = [
     path('', RedirectView.as_view(url='auto-park/', permanent=True)),
     path('admin/', admin.site.urls),
     path('auto-park/', include('autopark.urls')),
+    path('user-admin/', include('userAdmin.urls')),
 ]
