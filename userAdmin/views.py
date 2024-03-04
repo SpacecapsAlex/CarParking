@@ -17,7 +17,7 @@ def signup(request: HttpRequest):
         user.groups.add(group_user)
         user.save()
 
-        return HttpResponseRedirect(reverse('login'))
+        return HttpResponseRedirect(reverse('login_user'))
     else:
         return render(request, 'userAdmin/signup.html')
 

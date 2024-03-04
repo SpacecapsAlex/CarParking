@@ -137,8 +137,8 @@ def delete_car(request: HttpRequest, car_id: int):
     return HttpResponseRedirect(reverse('get-cars'))  # reverse - возвращает URL по имени представления
 
 
-#@login_required  # декоратор, требующий аутентификации пользователя
-@permission_required('car.p1')  # декоратор, требующий наличия определенных разрешений
+@login_required  # декоратор, требующий аутентификации пользователя
+# @permission_required('car.p1')  # декоратор, требующий наличия определенных разрешений
 def add_car(request):
     """
     Представление для добавления нового автомобиля в автопарк.

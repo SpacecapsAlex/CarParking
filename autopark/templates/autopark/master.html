@@ -20,6 +20,8 @@
           <li class="nav-item row">
             <a class="nav-link active col" aria-current="page" href="{% url 'get-cars' %}">Домой</a>
             <a class="nav-link active col" aria-current="page" href="{% url 'add-car' %}">Добавить</a>
+            <a class="nav-link active col" aria-current="page" href="{% url 'login_user' %}">Вход</a>
+            <a class="nav-link active col" aria-current="page" href="{% url 'signup' %}">Регистрация</a>
           </li>
         </ul>
         <form class="d-flex" role="search" method="post" action="{% url 'search-car' %}">
