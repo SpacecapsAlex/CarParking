@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpRequest, HttpResponseRedirect, JsonRes
 from django.urls import reverse
 from django.shortcuts import render
 from .models import CarType, CarBrand, Car, ParkingSlot, Parking
+from django.contrib.auth.decorators import login_required, permission_required
 
 
 def initialize(request):
@@ -136,13 +137,15 @@ def delete_car(request: HttpRequest, car_id: int):
     return HttpResponseRedirect(reverse('get-cars'))  # reverse - возвращает URL по имени представления
 
 
-"""
-Представление для добавления нового автомобиля в автопарк.
-Обрабатывает как GET, так и POST запросы.
-Для GET запросов извлекает список марок и типов автомобилей и рендерит шаблон 'add_car.html' с данными.
-Для POST запросов извлекает детали автомобиля из запроса и сохраняет новый автомобиль в базу данных, затем перенаправляется на URL 'get-cars'.
-"""
+#@login_required  # декоратор, требующий аутентификации пользователя
+@permission_required('car.p1')  # декоратор, требующий наличия определенных разрешений
 def add_car(request):
+    """
+    Представление для добавления нового автомобиля в автопарк.
+    Обрабатывает как GET, так и POST запросы.
+    Для GET запросов извлекает список марок и типов автомобилей и рендерит шаблон 'add_car.html' с данными.
+    Для POST запросов извлекает детали автомобиля из запроса и сохраняет новый автомобиль в базу данных, затем перенаправляется на URL 'get-cars'.
+    """
     if request.method == 'GET':
         brand_list = CarBrand.objects.all()
         type_list = CarType.objects.all()

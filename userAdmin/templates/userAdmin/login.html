@@ -17,9 +17,10 @@
       <div class="col-12 col-md-6">
         <h1 class="text-center mb-5">Login</h1>
         <form method="post">
+          {% csrf_token %}
           <div class="form-group mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email">
+            <label for="UserName" class="form-label">UserName</label>
+            <input type="text" class="form-control" id="UserName" name="userName">
           </div>
           <div class="form-group mb-3">
             <label for="password" class="form-label">Password</label>
