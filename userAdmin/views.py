@@ -41,4 +41,4 @@ def login_user(request: HttpRequest):
 
 def logout_user(request: HttpRequest):
     logout(request)
-    return HttpResponseRedirect(reverse('login_user'))
+    return HttpResponseRedirect(reverse('get-cars'))

@@ -19,9 +19,16 @@
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item row">
             <a class="nav-link active col" aria-current="page" href="{% url 'get-cars' %}">Домой</a>
+            {% if user.is_authenticated %}
             <a class="nav-link active col" aria-current="page" href="{% url 'add-car' %}">Добавить</a>
+            {% endif %}
+            {% if not user.is_authenticated %}
             <a class="nav-link active col" aria-current="page" href="{% url 'login_user' %}">Вход</a>
             <a class="nav-link active col" aria-current="page" href="{% url 'signup' %}">Регистрация</a>
+            {% endif %}
+            {% if user.is_authenticated %}
+            <a class="nav-link active col" aria-current="page" href="{% url 'logout_user' %}">Выход</a>
+            {% endif %}
           </li>
         </ul>
         <form class="d-flex" role="search" method="post" action="{% url 'search-car' %}">

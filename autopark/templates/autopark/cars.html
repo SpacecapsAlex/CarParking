@@ -8,7 +8,10 @@
 {# Определение содержимого для блока content #}
 {% block content %}
   <h1 class="text-center">Car list</h1>
+  {# Кнопка скрывается, если пользователь не вошёл в систему #}
+  {% if user.is_authenticated %}
   <a class="btn btn-outline-success" href="{% url 'add-car' %}">Добавить</a>
+  {% endif %}
   <table class="table table-hover table-info table-striped-columns table-bordered border-black overflow-x-visible">
       <thead class="fw-bold h4 text-center">
       <tr>
