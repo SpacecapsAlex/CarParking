@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('auto-park/', include('autopark.urls')),
     path('user-admin/', include('userAdmin.urls')),
+    path('media/', include('mediamodule.urls')),
 ]

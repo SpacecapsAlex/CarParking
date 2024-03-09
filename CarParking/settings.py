@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'autopark',
     'userAdmin',
+    'mediamodule',
 ]
 
 MIDDLEWARE = [
